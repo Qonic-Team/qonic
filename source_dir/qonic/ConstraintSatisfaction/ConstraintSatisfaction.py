@@ -112,6 +112,7 @@ class ConstraintSatisfactionProblem:
 
         # start by figuring out how many complex floats have already been added and multiply it by 32 to get the index of the next complex float bit that can be used
         nextComplexFloatBitIndex = len(self.__j) * 32
+        nextFloatBitIndex = len(self.__f) * 16
 
         n = nextComplexFloatBitIndex
         
@@ -864,17 +865,25 @@ class ConstraintSatisfactionProblem:
                         variables.append(variable)
 
                 # define the function form of this subconstraints
-                params = ""
-                varList = []
-                for var in variables:
-                    params += var + ", "
-                    varList.append(var)
-                params = params[:-2:]
+                def func (*var_configuration, var=variables, constraint=subConstraint):
+                    configuration = dict(zip(var, var_configuration))
+                    apply_not = False
+                    for term in constant.split(' '):
+                        if term == 'not':
+                            if apply_not:
+                                apply_not = False
+                            else:
+                                apply_not = True
+                        if term in var:
+                            if apply_not:
+                                term = not(configuration[term])
+                            else:
+                                term = configuration[term]
+                            if term: # if even one term is positive in cnf, then the whole subconstraint evaluates to true
+                                return True
+                    return False # all terms evaluated to false
 
-                func = '''def constraint''' + str(index) + '''(''' + params + '''):\n    return (''' + constraint + ''')\nself.__csp.add_constraint(constraint''' + str(index) + ''', ''' + str(varList) + ''')''' 
-
-                # exec the func string to add this constraint to the csp
-                exec(func)
+                self.__csp.add_constraint(func, variables) 
 
         elif constraintType == 'polynomial':
             # if the constraint is polynomial
@@ -1027,6 +1036,8 @@ class ConstraintSatisfactionProblem:
             elif (key in j.keys()): # if this variable exists in b set its value 
                 j[key] = configuration[key]
 
+        startBounds = ["&", "|", "~"] # list storing the possible operators that exist on the edge of an expression to help find the bounds of the expressions
+        endBounds = ["&", "|", "~"]
 
         # parse the constraints so that they apply within the error margin passed as an argument
         for constraint in polyConstraints:
