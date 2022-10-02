@@ -868,7 +868,7 @@ class ConstraintSatisfactionProblem:
                 def func (*var_configuration, var=variables, constraint=subConstraint):
                     configuration = dict(zip(var, var_configuration))
                     apply_not = False
-                    for term in constant.split(' '):
+                    for term in constraint.split(' '):
                         if term == 'not':
                             if apply_not:
                                 apply_not = False
