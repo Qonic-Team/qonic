@@ -7,11 +7,11 @@ The Qonic project is an open source, expandable framework for solving problems u
 
 **To install:** `pip3 install qonic`
 
-##QProgram
+## QProgram
 
-##ConstraintSatisfaction
+## ConstraintSatisfaction
 Constraint satisfaction is the process of finding a configuration of variables that satisfy a set of constraints imposed on those variables.  The `ConstraintSatisfactionProblem` class allows for mapping constraints from a CSP onto a binary quadratic model (BQM).  Once formulated as a BQM, a valid configuration can be searched for by using simulated or quantum annealing algorithms.
-###_`class`_`ConstraintSatisfactionProblem`
+### _`class`_`ConstraintSatisfactionProblem`
 **Methods**  
 * `fromStr(constraint, binary, real, complx)`
   **Description:**
