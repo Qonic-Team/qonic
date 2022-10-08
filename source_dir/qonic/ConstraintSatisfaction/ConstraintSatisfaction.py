@@ -823,7 +823,7 @@ class ConstraintSatisfactionProblem:
 
     def fromStr(self, constraint, binary, real, complx):
         '''
-        This is a function of add a constraint from a string
+        This is a function to add a constraint from a string
          - constraint is the constraint stored in a string
          - binary is a list of the binary variables used in the constraint
          - real is a list of the real variables used in the constraint
@@ -904,7 +904,7 @@ class ConstraintSatisfactionProblem:
          - there should also be 3 entries storing lists of variable names:
             - "binary" (stores the names of binary variables)
             - "real" (stores the names of the real variables)
-            - "complex" (stores the names of the complex variables)
+            - "complx" (stores the names of the complex variables)
         Example:
             >>> self.fromFile("constraints.yaml")
         '''
@@ -930,7 +930,7 @@ class ConstraintSatisfactionProblem:
                     # this element is the real variables list
                     real = list(value)
 
-                elif "complex" in key:
+                elif "complx" in key:
                     # this element is the complex variables list
                     complx = list(value)
 
