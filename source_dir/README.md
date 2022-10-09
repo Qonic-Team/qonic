@@ -15,7 +15,7 @@ Constraint satisfaction is the process of finding a configuration of variables t
 **Methods**  
 * `fromStr(constraint, binary, real, complx)`
   **Description:**
-  This is a function to add a constraint to the current CSP object from a string.  The constraint string can be made up of:
+  This function adds a constraint to the current CSP object from a string.  The constraint string can be made up of:
   * variables
     * these can be binary bits, or 16 bit real floats, or 32 bit complex floats.  Note that the float variables are are not technically represented with floats, but rather approximations constructed from binary polynomial sentences.  This is done so that the variables can be broken up and converted into a BQM
     * ⚠️ NOTE: variables can have any name that does not contain spaces or special characters (eg ! - / etc), with the exception of names of the form `f[number]` or `j[number]` (eg `'f12'`, `'j51.34'`) as these are special names reserved for use by the constraint parser
@@ -42,7 +42,7 @@ Constraint satisfaction is the process of finding a configuration of variables t
 
 * `fromFile(filename)`
   **Description:**
-  This is a function to add constraint(s) to the current CSP object from a yaml file.  The yaml file should have the following structure:
+  This function adds constraint(s) to the current CSP object from a yaml file.  The yaml file should have the following structure:
   * `constraint0`: the first constraint stored in a string
   * `constraint1`: the second constraint stored in a string
    ⋮
@@ -73,3 +73,39 @@ Constraint satisfaction is the process of finding a configuration of variables t
     >>> # add a new constraint from a yaml file
     >>> CSP.fromFile('constraints.yaml')
     ```
+
+* `toQUBO()`
+  **Description:**
+  This function returns the constraints in the form of a quadratic unconstrained binary optimization problem (or QUBO)
+
+  **Returns:**
+  * `({(vars): biases}, offset) <type 'tuple'>`: a tuple containing the biases between variables as a dictionary, and the offset of the QUBO
+
+  **Example:**
+   ```python
+  >>> self.toQUBO()
+  ({('b0', 'b1'): -3.9999999991051727, ('b0', 'b0'): 1.999999998686436, ('b1', 'b1'): 1.9999999986863806}, 8.661749095750793e-10)
+  ```
+
+* `checkConfiguration(configuration, err=0.0)`
+  **Description:**
+  This function takes a dictionary of values of variables and returns the number of constraints satisfied by the configuration (within a margin of error specified in err)
+
+  **Parameters:**
+  * `configuration <type 'dict'>`: the configuration of variables stored in a dictionary of the form `{'variable': value}`
+  * `err <type 'float'>`: the margin of error when checking constraints with relational operators `==`, `!=`, `<`, `<=`, `>`, `>=`
+
+  **Returns:**
+  * `constraintsMet <type 'int'>`: the number of constraints within the CSP that are satisfied by the passed configuration
+
+  **Example:**
+  ```python
+  >>> self.fromString('(a or b) and c', ['a', 'b', 'c'], [], [])
+  >>> self.checkConfiguration({'a': 1, 'b': 0, 'c': 1}, 0.1) # should return that 1 constraint is satisfied by this configuration
+  1
+  ```
+
+**Attributes**
+* `__b <type 'dict'>`: a dictionary storing a list of binary variables and the corresponding names
+* `__f <type 'dict'>`: a dictionary storing the binary polynomial expressions approximating 16 bit real floats (stored as strings) and the corresponding float variable names
+* `__j <type 'dict'>` a dictionary storing the binary polynomial expressions approximating 32 bit complex floats (stored as strings) and the corresponding float variable names

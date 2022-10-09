@@ -1008,7 +1008,7 @@ class ConstraintSatisfactionProblem:
         return (returnQUBO, offset)
 
 
-    def checkConfiguration(self, configuration, err):
+    def checkConfiguration(self, configuration, err=0.0):
         '''
         This function takes a dictionary of values of variables and returns the number of constraints satisfied by the configuration (within a margin of error specified in err)
         Example:
