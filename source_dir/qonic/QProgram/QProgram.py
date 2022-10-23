@@ -178,7 +178,7 @@ class QProgram:
             qc = program.to_circuit(framework='tequila')
             
             if self.backend != None:
-                state = tq.simulate(qc, backend=backend)
+                state = tq.simulate(qc, backend=self.backend)
             else:
                 state = tq.simulate(qc)
                 
