@@ -108,8 +108,8 @@ class QProgram:
         # run the program and get the output as a statevector
         qc = self.to_circuit(framework='tequila')
         if self.backend != None:
-            state = tq.simulate(qc, backend=backend)
-            measurement = tq.simulate(qc, samples=1, read_out_qubits=q_m, backend=backend).state
+            state = tq.simulate(qc, backend=self.backend)
+            measurement = tq.simulate(qc, samples=1, read_out_qubits=q_m, backend=self.backend).state
         else:
             state = tq.simulate(qc)
             measurement = tq.simulate(qc, samples=1, read_out_qubits=q_m).state
