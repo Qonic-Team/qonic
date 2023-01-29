@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name = 'qonic',
     packages = ['qonic'],
-    version = '0.0.6',
+    version = '0.0.7',
     description = 'The Qonic project is an open source, expandable framework for solving problems using hybrid quantum computing solutions.',
     author = 'cogrpar',
     author_email = 'owen.r.welsh@hotmail.com',
