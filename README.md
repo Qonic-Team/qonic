@@ -24,7 +24,7 @@ For more information on the specifics of how these components are implimented, s
 
   **Description:**
   
-  Declare a new QProgram object with quantum register `q̅`.  By default, the register will consist of one qubit intialized to the state [1, 0] (ie. $\ket{0}$).  Registers with multiple qubits can be initialized by passing a vecor encompassing the entire state of the register (eg. [1,0,0,0]=$\ket{00}$), or by passing a list of single qubit states (eg. [[1,0],[1,0]]).
+  Declare a new QProgram object with quantum register `q̅`.  By default, the register will consist of one qubit intialized to the state [1, 0] (ie. $\ket{0}$).  Registers with multiple qubits can be initialized by passing a vecor encompassing the entire state of the register (eg. [1,0,0,0] = $\ket{00}$), or by passing a list of single qubit states (eg. [[1, 0], [1, 0]]).
 
   **Parameters:**
   * `q̅ <type 'list'>`: vector corresponding to quantum state that the register is initialized to
@@ -50,7 +50,7 @@ For more information on the specifics of how these components are implimented, s
   * `variables <type 'list'>`: list of qubit indices specifying which qubits to apply the operator to
 
   **Example:**
-  ```python
+  ```py
   >>> S = qonic.QProgram(q̅=[[1,0],[0,1],[0,1],[1,0]]) # initial register state 0, 1, 1, 0
   >>> CNOT = np.array([[1,0,0,0],[0,0,0,1],[0,0,1,0],[0,1,0,0]]) # controlled not gate
   >>> H = np.array([[1/sqrt(2), 1/sqrt(2)],[1/sqrt(2), -1/sqrt(2)]]) # hadamard gate
@@ -166,13 +166,12 @@ For more information on the specifics of how these components are implimented, s
   
   **Description:**
   
-  Hoare Logic is a logical system for reasoning about the correctness of computer programs developed by C. A. R. Hoare. Correctness is determined with respect to assertion $P$ about the initial state of the computation, and assertion $Q$ about the final state. If a program $S$ runs when $P$ holds and this establishes $Q$, it is said to be correct with respect to $P$ and $Q$. This is expressed using a **Hoare Triple** as follows:
+  Hoare Logic is a logical system for reasoning about the correctness of computer programs developed by C. A. R. Hoare. Correctness is determined with respect to assertion *P* about the initial state of the computation, and assertion *Q* about the final state. If a program *S* runs when *P* holds and this establishes *Q*, it is said to be correct with respect to P and Q. This is expressed using a **Hoare Triple** as follows:
 
-  $\{P\}S\{Q\}$
+  *{P}S{Q}*
 
-  where $P$ is called the precondition and $S$ is called the postcondition. Quantum Hoare Logic (QHL) extends this concept to quantum programs. This has the potential to allow for rigorous reasoning about the correctness of quantum programs. In QHL, the precondition and postcondition are not assertions but quantum predicates, represented by physical observables. This function determines if a given Quantum Hoare Triple $\{Q\}S\{P\}$ is correct, where $P$ and $Q$ are observables and S is a QProgram object. For a technical explanation of this function and a description of possible use cases, see the [Qonic QHL notebook](https://github.com/Qonic-Team/qonic-QHoare-logic/blob/main/QHL.ipynb). In its current implementation, this function serves as a proof of concept. It evaluates the correctness of simple programs but quickly becomes intractable as the number of qubits in the register grows.
+  where *P* is called the precondition and *S* is called the postcondition. Quantum Hoare Logic (QHL) extends this concept to quantum programs. This has the potential to allow for rigorous reasoning about the correctness of quantum programs. In QHL, the precondition and postcondition are not assertions but quantum predicates, represented by physical observables. This function determines if a given Quantum Hoare Triple *{P}S{Q}* is correct, where *P* and *Q* are observables and *S* is a QProgram object. For a technical explanation of this function and a description of possible use cases, see the [Qonic QHL notebook](https://github.com/Qonic-Team/qonic-QHoare-logic/blob/main/QHL.ipynb). In its current implementation, this function serves as a proof of concept. It evaluates the correctness of simple programs but quickly becomes intractable as the number of qubits in the register grows.
 
-  
   **Parameters:**
   * `Q <type 'np.ndarray'>`: the postcondition observable
   * `P <type 'np.ndarray'>`: the precondition observable
@@ -265,7 +264,7 @@ Constraint satisfaction is the process of finding a configuration of variables t
   * `({(vars): biases}, offset) <type 'tuple'>`: a tuple containing the biases between variables as a dictionary, and the offset of the QUBO
 
   **Example:**
-   ```python
+  ```python
   >>> self.toQUBO()
   ({('b0', 'b1'): -3.9999999991051727, ('b0', 'b0'): 1.999999998686436, ('b1', 'b1'): 1.9999999986863806}, 8.661749095750793e-10)
   ```
