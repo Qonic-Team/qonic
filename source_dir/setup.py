@@ -1,9 +1,9 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name = 'qonic',
-    packages = ['qonic'],
-    version = '0.0.7',
+    packages = ['qonic', 'qonic.ConstraintSatisfaction', 'qonic.QProgram'],
+    version = '0.0.8',
     description = 'The Qonic project is an open source, expandable framework for solving problems using hybrid quantum computing solutions.',
     author = 'cogrpar',
     author_email = 'owen.r.welsh@hotmail.com',
