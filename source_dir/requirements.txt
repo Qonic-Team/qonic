@@ -6,3 +6,4 @@ qiskit>=0.21.2
 forest-benchmarking>=0.8.0
 dimod>=0.11.5
 dwavebinarycsp>=0.2.0
+pydantic>=2.4.0 # not directly required, pinned by Snyk to avoid a vulnerability
