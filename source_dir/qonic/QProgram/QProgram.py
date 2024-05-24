@@ -210,12 +210,12 @@ class QProgram:
         if (np.shape(Q)[0] != np.shape(Q)[1] or np.shape(Q)[0] != len(self.q̅)):
             raise ValueError('the passed postcondition has a different shape than the current program\'s unitary')
 
-        S_star = np.conj(self.to_superop()) # the complex conjugate of the QProgram in super operator form: ⟦S⟧*
+        S_star = np.transpose(np.conj(self.to_superop())) # the complex conjugate of the QProgram in super operator form: ⟦S⟧*
         dif = np.identity(len(self.q̅)) - Q # the difference (I - Q)
         P_dash = np.identity(len(self.q̅)) - unvec(np.matmul(S_star, vec(dif))) # calculate P' using I - ⟦S⟧*(I-Q)
         return P_dash
 
-    def correct_q_hoare_triple(self, Q, P): # function that checks if the QHoare triple {Q}S{P} is valid
+    def correct_q_hoare_triple(self, P, Q): # function that checks if the QHoare triple {P}S{Q} is valid
         if (np.shape(Q)[0] != np.shape(Q)[1] or np.shape(Q)[0] != len(self.q̅)):
             raise ValueError('the passed postcondition has a different shape than the current program\'s unitary')
 
@@ -226,7 +226,7 @@ class QProgram:
 
         # check to see if P ⊑ P' (where ⊑ denotes a Löwner partial order)
         dif = P_dash - P
-        if (np.all(np.linalg.eigvals(dif) >= -0.000001)): # the partial order is satisfied
+        if (np.sum(np.linalg.eigvals(dif) >= -0.000001)): # the partial order is satisfied
             return True # the program is correct
         else:
             return False # the program is not correct

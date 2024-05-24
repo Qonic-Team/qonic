@@ -1,15 +1,25 @@
 Metadata-Version: 2.1
 Name: qonic
-Version: 0.0.8
+Version: 0.0.9
 Summary: The Qonic project is an open source, expandable framework for solving problems using hybrid quantum computing solutions.
 Home-page: https://github.com/Qonic-Team/qonic.git
+Download-URL: https://github.com/Qonic-Team/qonic/archive/refs/heads/main.zip
 Author: cogrpar
 Author-email: owen.r.welsh@hotmail.com
 License: Apache License 2.0
-Download-URL: https://github.com/Qonic-Team/qonic/archive/refs/heads/main.zip
 Keywords: qonic,quantum computing
-Platform: UNKNOWN
 Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.22.2
+Requires-Dist: sympy>=1.12
+Requires-Dist: PyYAML>=5.4.1
+Requires-Dist: tequila-basic>=1.8.1
+Requires-Dist: qiskit>=0.21.2
+Requires-Dist: forest-benchmarking>=0.8.0
+Requires-Dist: dimod>=0.11.5
+Requires-Dist: dwavebinarycsp>=0.2.0
+Requires-Dist: pillow>=10.3.0
+Requires-Dist: fonttools>=4.43.0
+Requires-Dist: setuptools>=65.5.1
 
 [![Python application](https://github.com/Qonic-Team/qonic/actions/workflows/python-app.yml/badge.svg)](https://github.com/Qonic-Team/qonic/actions/workflows/python-app.yml)
 [![CodeQL](https://github.com/Qonic-Team/qonic/actions/workflows/codeql.yml/badge.svg)](https://github.com/Qonic-Team/qonic/actions/workflows/codeql.yml)
@@ -306,5 +316,3 @@ Constraint satisfaction is the process of finding a configuration of variables t
 * `__b <type 'dict'>`: a dictionary storing a list of binary variables and the corresponding names
 * `__f <type 'dict'>`: a dictionary storing the binary polynomial expressions approximating 16 bit real floats (stored as strings) and the corresponding float variable names
 * `__j <type 'dict'>` a dictionary storing the binary polynomial expressions approximating 32 bit complex floats (stored as strings) and the corresponding float variable namesu
-
-
