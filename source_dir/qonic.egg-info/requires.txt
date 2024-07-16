@@ -8,4 +8,4 @@ dimod>=0.11.5
 dwavebinarycsp>=0.2.0
 pillow>=10.3.0
 fonttools>=4.43.0
-setuptools>=65.5.1
+setuptools>=70.0.0
