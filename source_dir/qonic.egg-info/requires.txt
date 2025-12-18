@@ -7,5 +7,6 @@ forest-benchmarking>=0.8.0
 dimod>=0.11.5
 dwavebinarycsp>=0.2.0
 pillow>=10.3.0
-fonttools>=4.43.0
+fonttools>=4.61.0
 setuptools>=65.5.1
+urllib3>=2.6.0 # not directly required, pinned by Snyk to avoid a vulnerability
